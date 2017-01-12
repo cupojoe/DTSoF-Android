@@ -135,15 +135,27 @@ public class AppBeaconManager {
 
                 }
                 Log.w("APP: ", "End of list");
-                Log.w("APP: ", "Temp beacon is: " + tempClosestLocBeacon.getMinor() + " " + tempClosestLocBeacon.getRssi());
+//                Log.w("APP: ", "Temp beacon is: " + tempClosestLocBeacon.getMinor() + " " + tempClosestLocBeacon.getRssi());
                 if (System.currentTimeMillis() - startTimeAtLoc > 3000) {
-                    closestLocBeacon = tempClosestLocBeacon;
+                    updateLocation(tempClosestLocBeacon);
                 }
                 if (closestLocBeacon != null) {
                     Log.w("APP: ", "Closest beacon is: " + closestLocBeacon.getMinor() + " " + closestLocBeacon.getRssi());
                 }
             }
         });
+    }
+
+    private void updateLocation(Beacon b) {
+        closestLocBeacon = tempClosestLocBeacon;
+//        RequestParams params = new RequestParams();
+//        params.add("deviceId", "123");
+//        params.add("positionId", Integer.toString(b.getMinor()));
+//        AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+//            }
+//        });
     }
 
     public void startMonitoring(final MonitoringCallback callback) {
