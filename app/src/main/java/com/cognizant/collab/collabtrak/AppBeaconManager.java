@@ -44,7 +44,7 @@ public class AppBeaconManager {
 
     private BeaconManager beaconManager;
 
-    private boolean isConnected = false;
+    private boolean isScanning = false;
 
     private Beacon closestLocBeacon;
     private Beacon tempClosestLocBeacon;
@@ -166,23 +166,23 @@ public class AppBeaconManager {
         });
     }
 
-    public void startMonitoring(final MonitoringCallback callback) {
+    public void startMonitoring() {
 
         beaconManager.connect(new com.estimote.sdk.BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
                 Log.w("APP: ", "service ready");
                 beaconManager.startRanging(locRegion);
+                isScanning = true;
             }
         });
     }
 
     public void stopMonitoring() {
-        beaconManager.disconnect();
-        isConnected = false;
+        isScanning = false;
+        beaconManager.stopRanging(locRegion);
     }
 
-    public boolean isConnected() {
-        return isConnected;
-    }
+
+    public boolean isScanning() { return isScanning; }
 }

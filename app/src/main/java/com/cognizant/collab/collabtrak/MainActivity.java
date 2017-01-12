@@ -52,12 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         beaconManager = AppBeaconManager.getInstance();
         beaconManager.createBeaconManager(this);
-        beaconManager.startMonitoring(new MonitoringCallback() {
-            @Override
-            public void onMonitoringStarted(ArrayList<String> regions) {
-                updateList(regions);
-            }
-        });
+//        beaconManager.startMonitoring();
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
@@ -67,27 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void updateList(ArrayList<String> regions) {
-        if (regionsAdapter == null) {
-            regionsAdapter = new ArrayAdapter<String>(this,
-                    R.layout.item_beacon,
-                    R.id.region_uuid,
-                    regions
-            );
-            regionsListView.setAdapter(regionsAdapter);
-        } else {
-            regionsAdapter.clear();
-            regionsAdapter.addAll(regions);
-            regionsAdapter.notifyDataSetChanged();
-        }
-    }
-
-    private void clearList() {
-        if (regionsAdapter != null) {
-            regionsAdapter.clear();
-            regionsAdapter.notifyDataSetChanged();
-        }
-    }
 
     @Override
     protected void onResume(){
@@ -98,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+//        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -124,6 +98,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view){
-
+        switch(view.getId()){
+            case R.id.toggleButton:
+                if (beaconManager.isScanning()) {
+                    beaconManager.stopMonitoring();
+                } else {
+                    beaconManager.startMonitoring();
+                }
+                break;
+        }
     }
 }
