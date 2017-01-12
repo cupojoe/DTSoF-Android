@@ -40,8 +40,7 @@ public class AppBeaconManager {
 
     private String estimoteUUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
     private Region locRegion, productsRegion;
-    private int major = 2001;
-    private int[] mockBeacons = {1001, 1002, 1003};
+    private String deviceId = "alpha";
 
     private BeaconManager beaconManager;
 
@@ -125,13 +124,13 @@ public class AppBeaconManager {
         beaconManager.setRangingListener(new BeaconManager.RangingListener() {
             @Override
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
-                Log.w("APP: ", "Beacons discovered " + list.size() );
+//                Log.w("APP: ", "Beacons discovered " + list.size() );
                 for (Beacon b: list) {
                     if (tempClosestLocBeacon == null || tempClosestLocBeacon.getRssi() < b.getRssi()) {
                         tempClosestLocBeacon = b;
                         startTimeAtLoc = System.currentTimeMillis();
                     }
-                    Log.w("APP: ", b.getMajor() + " " + b.getMinor() + " " + b.getRssi());
+//                    Log.w("APP: ", b.getMajor() + " " + b.getMinor() + " " + b.getRssi());
 
                 }
                 Log.w("APP: ", "End of list");
@@ -140,23 +139,31 @@ public class AppBeaconManager {
                     updateLocation(tempClosestLocBeacon);
                     tempClosestLocBeacon = null;
                 }
-                if (closestLocBeacon != null) {
-                    Log.w("APP: ", "Closest beacon is: " + closestLocBeacon.getMinor() + " " + closestLocBeacon.getRssi());
-                }
             }
         });
     }
 
     private void updateLocation(Beacon b) {
         closestLocBeacon = tempClosestLocBeacon;
-//        RequestParams params = new RequestParams();
-//        params.add("deviceId", "123");
-//        params.add("positionId", Integer.toString(b.getMinor()));
-//        AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//            }
-//        });
+
+        Log.w("APP: ", "Updating location");
+        if (closestLocBeacon != null) {
+            Log.w("APP: ", "Closest beacon is: " + closestLocBeacon.getMinor() + " " + closestLocBeacon.getRssi());
+        }
+
+        RequestParams params = new RequestParams();
+        params.add("deviceId", deviceId);
+        params.add("positionId", Integer.toString(b.getMinor()));
+        AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                Log.w("APP: ", "Response " + statusCode);
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String resp, Throwable error) {
+                Log.w("APP: ", "Response " + statusCode + " " + resp);
+            }
+        });
     }
 
     public void startMonitoring(final MonitoringCallback callback) {
@@ -166,33 +173,6 @@ public class AppBeaconManager {
             public void onServiceReady() {
                 Log.w("APP: ", "service ready");
                 beaconManager.startRanging(locRegion);
-
-//                OrchestrateClient.get("beacons", null, new JsonHttpResponseHandler() {
-//                    @Override
-//                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                        ArrayList<String> results = new ArrayList<>();
-//                        for (int i = 0; i < response.length(); i++) {
-//                            try {
-//                                JSONObject obj = response.getJSONObject(i).getJSONObject("value");
-//                                beaconManager.startMonitoring(new Region(
-//                                        "Region " + i,
-//                                        UUID.fromString(obj.getString("UUID")),
-//                                        obj.getInt("major"),
-//                                        obj.getInt("minor")
-//                                    )
-//                                );
-//                                results.add(i, obj.getString("UUID"));
-//                                isConnected = true;
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                                isConnected =false;
-//                            }
-//                        }
-//                        callback.onMonitoringStarted(results);
-//                        System.out.println(statusCode);
-//
-//                    }
-//                });
             }
         });
     }
