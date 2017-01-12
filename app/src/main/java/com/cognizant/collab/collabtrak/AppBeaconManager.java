@@ -127,7 +127,7 @@ public class AppBeaconManager {
             public void onBeaconsDiscovered(Region region, List<Beacon> list) {
                 Log.w("APP: ", "Beacons discovered " + list.size() );
                 for (Beacon b: list) {
-                    if (tempClosestLocBeacon == null || tempClosestLocBeacon.getRssi() > b.getRssi()) {
+                    if (tempClosestLocBeacon == null || tempClosestLocBeacon.getRssi() < b.getRssi()) {
                         tempClosestLocBeacon = b;
                         startTimeAtLoc = System.currentTimeMillis();
                     }
@@ -138,6 +138,7 @@ public class AppBeaconManager {
 //                Log.w("APP: ", "Temp beacon is: " + tempClosestLocBeacon.getMinor() + " " + tempClosestLocBeacon.getRssi());
                 if (System.currentTimeMillis() - startTimeAtLoc > 3000) {
                     updateLocation(tempClosestLocBeacon);
+                    tempClosestLocBeacon = null;
                 }
                 if (closestLocBeacon != null) {
                     Log.w("APP: ", "Closest beacon is: " + closestLocBeacon.getMinor() + " " + closestLocBeacon.getRssi());
