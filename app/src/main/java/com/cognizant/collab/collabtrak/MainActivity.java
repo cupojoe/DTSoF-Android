@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+import android.widget.CompoundButton;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -27,7 +29,7 @@ import java.util.HashMap;
 import cz.msebera.android.httpclient.Header;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private SessionManager sessionManager;
     private AppBeaconManager beaconManager;
@@ -59,6 +61,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        Switch aSwitch = (Switch)findViewById(R.id.trackSwitch);
 //        aSwitch.setOnClickListener(this);
+
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // The toggle is enabled
+                    beaconManager.startMonitoring();
+                } else {
+                    // The toggle is disabled
+                    beaconManager.stopMonitoring();
+                }
+            }
+        });
 
     }
 
@@ -96,16 +111,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onClick(View view){
-        switch(view.getId()){
-            case R.id.toggleButton:
-                if (beaconManager.isScanning()) {
-                    beaconManager.stopMonitoring();
-                } else {
-                    beaconManager.startMonitoring();
-                }
-                break;
-        }
-    }
+
+//    @Override
+//    public void onClick(View view){
+//
+//        switch(view.getId()){
+//            case R.id.toggleButton:
+//                Button toggle = (Button)findViewById(R.id.toggleButton);
+//                if (beaconManager.isScanning()) {
+//                    beaconManager.stopMonitoring();
+//                } else {
+//                    beaconManager.startMonitoring();
+//                }
+//                break;
+//        }
+//    }
 }
