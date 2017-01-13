@@ -49,6 +49,7 @@ public class AppBeaconManager {
     private Beacon closestLocBeacon;
     private Beacon tempClosestLocBeacon;
     private long startTimeAtLoc;
+    private int lastClosestLocBeaconMinor = 0;
 
 
     //Visit end point
@@ -149,21 +150,31 @@ public class AppBeaconManager {
         Log.w("APP: ", "Updating location");
         if (closestLocBeacon != null) {
             Log.w("APP: ", "Closest beacon is: " + closestLocBeacon.getMinor() + " " + closestLocBeacon.getRssi());
+            Log.w("APP: ", "Latest beacon minor is: " + lastClosestLocBeaconMinor + " " + "closest minor is " + closestLocBeacon.getMinor());
+
+            // Update the location just if it has changed
+            if (lastClosestLocBeaconMinor != closestLocBeacon.getMinor()){
+                Log.w("APP: ", "Send location to the server");
+                lastClosestLocBeaconMinor = closestLocBeacon.getMinor();
+                RequestParams params = new RequestParams();
+                params.add("deviceId", deviceId);
+                params.add("positionId", Integer.toString(b.getMinor()));
+                AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        Log.w("APP: ", "Response " + statusCode);
+                    }
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String resp, Throwable error) {
+                        Log.w("APP: ", "Response " + statusCode + " " + resp);
+                    }
+                });
+            } else {
+                Log.w("APP: ", "Location has not changed");
+            }
+
         }
 
-        RequestParams params = new RequestParams();
-        params.add("deviceId", deviceId);
-        params.add("positionId", Integer.toString(b.getMinor()));
-        AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                Log.w("APP: ", "Response " + statusCode);
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String resp, Throwable error) {
-                Log.w("APP: ", "Response " + statusCode + " " + resp);
-            }
-        });
     }
 
     public void startMonitoring() {
