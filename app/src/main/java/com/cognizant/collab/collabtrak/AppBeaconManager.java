@@ -1,26 +1,17 @@
 package com.cognizant.collab.collabtrak;
 
-import android.app.PendingIntent;
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.Console;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
@@ -157,7 +148,7 @@ public class AppBeaconManager {
                 Log.w("APP: ", "Send location to the server");
                 lastClosestLocBeaconMinor = closestLocBeacon.getMinor();
                 RequestParams params = new RequestParams();
-                params.add("deviceId", deviceId);
+                params.add("deviceId", getDeviceId());
                 params.add("positionId", Integer.toString(b.getMinor()));
                 AsyncClient.post("Visits/position", params, new JsonHttpResponseHandler() {
                     @Override
@@ -196,4 +187,8 @@ public class AppBeaconManager {
 
 
     public boolean isScanning() { return isScanning; }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
 }

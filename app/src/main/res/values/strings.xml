@@ -16,4 +16,5 @@
     </string>
     <string name="prompt_email_id">Email ID</string>
     <string name="error_user_not_found">User not found</string>
+    <string name="scan_off">Scan Off</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.cognizant.collab.collabtrak;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,60 +18,64 @@ import android.widget.ToggleButton;
 import android.widget.CompoundButton;
 
 import com.estimote.sdk.SystemRequirementsChecker;
+import com.github.nkzawa.emitter.Emitter;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Console;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import cz.msebera.android.httpclient.Header;
 
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.emitter.Emitter;
 
 public class MainActivity extends AppCompatActivity {
 
     private SessionManager sessionManager;
     private AppBeaconManager beaconManager;
     private ArrayAdapter<String> regionsAdapter;
-    private ListView regionsListView;
+
+    private Socket socket;
+    {
+        try {
+            socket = IO.socket("https://mysterious-bayou-86493.herokuapp.com");
+        } catch (java.net.URISyntaxException e) {
+            Log.w("APP: ", "SOCKET ERROR");
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         WindowManager windowManager = (WindowManager)getSystemService(WINDOW_SERVICE);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-//        TextView userIdView = (TextView) findViewById(R.id.userId);
-//        regionsListView = (ListView)findViewById(R.id.list_regions);
-//
-//        sessionManager = new SessionManager(this);
-//        sessionManager.checkLogin();
-//
-//        HashMap<String, String> user = sessionManager.getUserDetails();
-//        userIdView.setText(user.get("email"));
-
         Log.w("APP: ", "Start app");
 
         beaconManager = AppBeaconManager.getInstance();
         beaconManager.createBeaconManager(this);
-//        beaconManager.startMonitoring();
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
-//        Switch aSwitch = (Switch)findViewById(R.id.trackSwitch);
-//        aSwitch.setOnClickListener(this);
+        socket.connect();
+        socket.on("/device/" + beaconManager.getDeviceId() + "/update", deviceUpdated);
 
         ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Intent myIntent = new Intent(getBaseContext(), SelfServiceActivity.class);
+                startActivity(myIntent);
+
                 if (isChecked) {
                     // The toggle is enabled
                     beaconManager.startMonitoring();
@@ -131,4 +137,17 @@ public class MainActivity extends AppCompatActivity {
 //                break;
 //        }
 //    }
+
+    Emitter.Listener deviceUpdated = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            Log.w("APP: ", "Device updated");
+            JSONObject data = (JSONObject) args[0];
+            try {
+                Log.w("APP: ", data.getString("data"));
+            } catch (JSONException e) {
+                return;
+            }
+        }
+    };
 }
