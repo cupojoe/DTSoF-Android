@@ -140,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         beaconManager.startMonitoring();
     }
     private void deactivateDevice() {
+        Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(myIntent);
         TextView counter = (TextView) findViewById(R.id.counterLabel);
         counter.setText("Inactive");
         beaconManager.stopMonitoring();
@@ -162,6 +164,14 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 activateDevice();
+                            }
+                        });
+                        break;
+                    case "deactivate":
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                deactivateDevice();
                             }
                         });
                         break;
