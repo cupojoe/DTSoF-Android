@@ -150,6 +150,10 @@ public class MainActivity extends AppCompatActivity {
         TextView counter = (TextView) findViewById(R.id.counterLabel);
         counter.setText(value);
     }
+    private void updateProduct(String value) {
+        TextView productCounter = (TextView) findViewById(R.id.productCounter);
+        productCounter.setText(value);
+    }
 
     Emitter.Listener deviceUpdated = new Emitter.Listener() {
         @Override
@@ -159,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 Log.w("APP: ", data.getString("data"));
                 switch (data.getString("data")) {
-                    case "activate":
+                    case "activated":
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
@@ -183,6 +187,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         break;
+                    case "product":
+                        final String qty = data.getString("quantity");
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateProduct(qty);
+                            }
+                        });
+                        break;
                     case "ready":
                         runOnUiThread(new Runnable() {
                             @Override
@@ -203,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             } catch (JSONException e) {
+                Log.w("APP: ", "JSON Error " + e.getMessage());
                 return;
             }
         }

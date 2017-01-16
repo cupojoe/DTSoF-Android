@@ -52,7 +52,7 @@
         android:cursorVisible="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textAlignment="center"
         android:textIsSelectable="false"
         android:typeface="sans"
@@ -62,10 +62,31 @@
         android:enabled="true"
         android:minLines="2"
         android:singleLine="false"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
         android:layout_below="@+id/progressBar3"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/productCounter"
+        android:text="0"
+        android:inputType="none"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:textIsSelectable="false"
+        android:singleLine="true"
+        android:selectAllOnFocus="false"
+        android:textAlignment="center"
+        android:background="@android:color/transparent"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignParentTop="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -78,7 +99,7 @@
         android:cursorVisible="false"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:textSize="46sp"
+        android:textSize="36sp"
         android:textAlignment="center"
         android:textIsSelectable="false"
         android:typeface="sans"
@@ -86,18 +107,10 @@
         android:selectAllOnFocus="false"
         android:background="@android:color/transparent"
         android:enabled="true"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
         android:gravity="top"
-        android:layout_alignParentRight="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentBottom="false"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_centerHorizontal="false"
         android:layout_centerInParent="false"
-        android:layout_alignParentTop="false"
-        android:layout_alignTop="@+id/imageView"
-        android:layout_marginTop="40dp" />
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
