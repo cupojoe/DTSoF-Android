@@ -70,21 +70,21 @@ public class MainActivity extends AppCompatActivity {
         socket.connect();
         socket.on("/device/" + beaconManager.getDeviceId() + "/update", deviceUpdated);
 
-        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                Intent myIntent = new Intent(getBaseContext(), SelfServiceActivity.class);
-                startActivity(myIntent);
-
-                if (isChecked) {
-                    // The toggle is enabled
-                    beaconManager.startMonitoring();
-                } else {
-                    // The toggle is disabled
-                    beaconManager.stopMonitoring();
-                }
-            }
-        });
+//        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+//        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                Intent myIntent = new Intent(getBaseContext(), SelfServiceActivity.class);
+//                startActivity(myIntent);
+//
+//                if (isChecked) {
+//                    // The toggle is enabled
+//                    beaconManager.startMonitoring();
+//                } else {
+//                    // The toggle is disabled
+//                    beaconManager.stopMonitoring();
+//                }
+//            }
+//        });
 
     }
 
@@ -138,6 +138,13 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+    private void activateDevice() {
+        beaconManager.startMonitoring();
+    }
+    private void deactivateDevice() {
+        beaconManager.stopMonitoring();
+    }
+
     Emitter.Listener deviceUpdated = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
@@ -145,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
             JSONObject data = (JSONObject) args[0];
             try {
                 Log.w("APP: ", data.getString("data"));
+                switch (data.getString("data")) {
+                    case "activate":
+                        activateDevice();
+                    break;
+                }
             } catch (JSONException e) {
                 return;
             }
