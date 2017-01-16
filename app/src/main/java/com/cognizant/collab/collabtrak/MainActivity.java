@@ -42,16 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     private SessionManager sessionManager;
     private AppBeaconManager beaconManager;
-    private ArrayAdapter<String> regionsAdapter;
-
-    private Socket socket;
-    {
-        try {
-            socket = IO.socket("https://mysterious-bayou-86493.herokuapp.com");
-        } catch (java.net.URISyntaxException e) {
-            Log.w("APP: ", "SOCKET ERROR");
-        }
-    }
+    private SocketNotificationManager socketManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
 
         beaconManager = AppBeaconManager.getInstance();
         beaconManager.createBeaconManager(this);
-        socket.connect();
-        socket.on("/device/" + beaconManager.getDeviceId() + "/update", deviceUpdated);
+        socketManager = SocketNotificationManager.getInstance();
+        socketManager.addEvent("/device/" + beaconManager.getDeviceId() + "/update", deviceUpdated);
 
 //        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
 //        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,6 +77,11 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    @Override
+    protected void onDestroy(){
+        socketManager.disconnectSocket();
     }
 
 
@@ -139,10 +135,18 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     private void activateDevice() {
+        TextView counter = (TextView) findViewById(R.id.counterLabel);
+        counter.setText("Active");
         beaconManager.startMonitoring();
     }
     private void deactivateDevice() {
+        TextView counter = (TextView) findViewById(R.id.counterLabel);
+        counter.setText("Inactive");
         beaconManager.stopMonitoring();
+    }
+    private void updateTimer(String value) {
+        TextView counter = (TextView) findViewById(R.id.counterLabel);
+        counter.setText(value);
     }
 
     Emitter.Listener deviceUpdated = new Emitter.Listener() {
@@ -154,8 +158,39 @@ public class MainActivity extends AppCompatActivity {
                 Log.w("APP: ", data.getString("data"));
                 switch (data.getString("data")) {
                     case "activate":
-                        activateDevice();
-                    break;
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                activateDevice();
+                            }
+                        });
+                        break;
+                    case "timer":
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateTimer("20-25");
+                            }
+                        });
+                        break;
+                    case "ready":
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent myIntent = new Intent(getBaseContext(), ReadyNotificationActivity.class);
+                                startActivity(myIntent);
+                            }
+                        });
+                        break;
+                    case "selfservice":
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent myIntent = new Intent(getBaseContext(), SelfServiceActivity.class);
+                                startActivity(myIntent);
+                            }
+                        });
+                        break;
                 }
             } catch (JSONException e) {
                 return;

@@ -15,4 +15,8 @@ public class TrakApplication extends Application {
 
     }
 
+    void test () {
+        
+    }
+
 }
