@@ -247,6 +247,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                         break;
+                    case "walkout":
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent myIntent = new Intent(getBaseContext(), WalkoutMessageActivity.class);
+                                startActivity(myIntent);
+                            }
+                        });
+                        break;
                 }
             } catch (JSONException e) {
                 Log.w("APP: ", "JSON Error " + e.getMessage());

@@ -11,3 +11,4 @@ Parameters to load views:
   - selfservice: C3 Self service mode
   - comeback: C8 Come back
   - selfservicethankyou: C3.1 Thank you for using self service
+  - walkout: C7 Walk out message

@@ -8,13 +8,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.cognizant.collab.collabtrak.activities.SelfserviceThankyouActivity"
+    tools:context="com.cognizant.collab.collabtrak.activities.WalkoutMessageActivity"
     android:background="@color/background">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thank you for using the self service"
+        android:text="See you soon \n Your turn is in 20-25 min"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"
@@ -42,15 +42,14 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_applause_solid"
+        app:srcCompat="@drawable/ic_external_link_outline"
         android:id="@+id/imageView2"
-        android:layout_above="@+id/counterLabelText"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginEnd="37dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="15dp"
+        android:layout_above="@+id/counterLabelText"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
