@@ -1,4 +1,4 @@
-package com.cognizant.collab.collabtrak;
+package com.cognizant.collab.collabtrak.activities;
 
 
 import android.graphics.Typeface;
@@ -6,19 +6,21 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.cognizant.collab.collabtrak.R;
+
 /**
  * Created by ctsuser1 on 1/16/17.
  */
 
-public class WaitAssociateActivity extends AppCompatActivity {
+public class SelfserviceThankyouActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.wait_associate);
+        setContentView(R.layout.selfservice_thankyou);
 
         TextView tx = (TextView)findViewById(R.id.spinner);
-        Typeface iconFont = Typeface.createFromAsset(getAssets(), "fonts/TeleIcon-Outline.ttf");
+        Typeface iconFont = Typeface.createFromAsset(getAssets(), "fonts/TeleIcon-Solid.ttf");
         tx.setTypeface(iconFont);
     }
 }

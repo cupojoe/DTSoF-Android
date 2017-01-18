@@ -1,4 +1,4 @@
-package com.cognizant.collab.collabtrak;
+package com.cognizant.collab.collabtrak.managers;
 
 import java.util.HashMap;
 

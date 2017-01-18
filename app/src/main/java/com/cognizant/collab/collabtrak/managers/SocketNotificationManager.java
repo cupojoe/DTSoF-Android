@@ -1,26 +1,10 @@
-package com.cognizant.collab.collabtrak;
+package com.cognizant.collab.collabtrak.managers;
 
-import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
-import com.estimote.sdk.Beacon;
-import com.estimote.sdk.BeaconManager;
-import com.estimote.sdk.Region;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
-import com.loopj.android.http.JsonHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-
-import org.json.JSONArray;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.TimerTask;
-import java.util.UUID;
-
-import cz.msebera.android.httpclient.Header;
 
 
 /**

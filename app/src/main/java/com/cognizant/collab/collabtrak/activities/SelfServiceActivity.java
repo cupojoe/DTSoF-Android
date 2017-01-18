@@ -1,5 +1,6 @@
-package com.cognizant.collab.collabtrak;
+package com.cognizant.collab.collabtrak.activities;
 
+import com.cognizant.collab.collabtrak.*;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;

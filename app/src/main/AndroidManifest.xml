@@ -26,9 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelfServiceActivity"></activity>
-        <activity android:name=".ReadyNotificationActivity"></activity>
-        <activity android:name=".WaitAssociateActivity"></activity>
+        <activity android:name=".activities.SelfServiceActivity"></activity>
+        <activity android:name=".activities.ReadyNotificationActivity"></activity>
+        <activity android:name=".activities.WaitAssociateActivity"></activity>
+        <activity android:name=".activities.ServiceCompletedActivity"></activity>
+        <activity android:name=".activities.ComeBackActivity"></activity>
+        <activity android:name=".activities.SelfserviceThankyouActivity"></activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

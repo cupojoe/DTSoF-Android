@@ -1,8 +1,9 @@
-package com.cognizant.collab.collabtrak;
+package com.cognizant.collab.collabtrak.managers;
 
 import android.content.Context;
 import android.util.Log;
 
+import com.cognizant.collab.collabtrak.AsyncClient;
 import com.estimote.sdk.Beacon;
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Region;
