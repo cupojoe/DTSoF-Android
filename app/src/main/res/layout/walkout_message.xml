@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="See you soon \n Your turn is in 20-25 min"
+        android:text="@string/timer"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"

@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Self Service Mode"
+        android:text="@string/self_service_mode"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"

@@ -1,23 +1,30 @@
 <resources>
     <string name="app_name">CollabTrak</string>
-    <string name="title_activity_login">Sign in</string>
+    <string name="title_activity_login" translatable="false">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
+    <string name="prompt_email" translatable="false">Email</string>
+    <string name="prompt_password" translatable="false">Password (optional)</string>
+    <string name="action_sign_in" translatable="false">Sign in or register</string>
+    <string name="action_sign_in_short" translatable="false">Sign in</string>
+    <string name="error_invalid_email" translatable="false">This email address is invalid</string>
+    <string name="error_invalid_password" translatable="false">This password is too short</string>
+    <string name="error_incorrect_password" translatable="false">This password is incorrect</string>
+    <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="permission_rationale" translatable="false">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="prompt_email_id">Email ID</string>
-    <string name="error_user_not_found">User not found</string>
-    <string name="scan_off">Scan Off</string>
+    <string name="prompt_email_id" translatable="false">Email ID</string>
+    <string name="error_user_not_found" translatable="false">User not found</string>
+    <string name="scan_off" translatable="false">Scan Off</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <!-- Strings to translate -->
+    <string name="inactive" translatable="false">Inactive</string>
+    <string name="self_service_mode">self service mode</string>
+    <string name="self_service_thankyou" >Thank you for using the self service</string>
+    <string name="completed">your data was deleted from this device</string>
+    <string name="timer">See you soon \\n Your turn is in 20-25 min</string>
 </resources>

@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thank you for using the self service"
+        android:text="@string/self_service_thankyou"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"

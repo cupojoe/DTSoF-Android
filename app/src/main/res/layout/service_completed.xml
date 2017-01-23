@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your data was deleted from this device"
+        android:text="@string/completed"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"
