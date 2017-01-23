@@ -32,7 +32,7 @@ public class AppBeaconManager {
 
     private String estimoteUUID = "B9407F30-F5F8-466E-AFF9-25556B57FE6D";
     private Region locRegion, productsRegion;
-    private String deviceId = "alpha";
+    private String deviceId = "charlie";
 
     private BeaconManager beaconManager;
 
