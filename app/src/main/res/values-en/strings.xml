@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CollabTrak</string>
+    <string name="completed">your data was deleted from this device</string>
+    <string name="self_service_mode">self service mode</string>
+    <string name="self_service_thankyou">thank you for using the self service</string>
+    <string name="timer">see you soon \\n your turn is in 20-25 min</string>
+    <string name="come_back">you are up in ±5 min</string>
+    <string name="ready">It\'s your turn</string>
+    <string name="staff">a staff member will arrive shortly</string>
+</resources>

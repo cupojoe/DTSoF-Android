@@ -23,8 +23,11 @@
 
     <!-- Strings to translate -->
     <string name="inactive" translatable="false">Inactive</string>
-    <string name="self_service_mode">self service mode</string>
-    <string name="self_service_thankyou" >Thank you for using the self service</string>
-    <string name="completed">your data was deleted from this device</string>
-    <string name="timer">See you soon \\n Your turn is in 20-25 min</string>
+    <string name="self_service_mode">self-service modus aktiviert</string>
+    <string name="self_service_thankyou" >danke, dass sie den self-service benutzein</string>
+    <string name="completed">ihre daten wurden vom gerät gelöscht</string>
+    <string name="timer">geschätzte wartezeit</string>
+    <string name="come_back">in ±5 minuten werden sie bedient</string>
+    <string name="ready">sie sind an der reihe!</string>
+    <string name="staff">ein mitarbeiter ist auf dem weg</string>
 </resources>
