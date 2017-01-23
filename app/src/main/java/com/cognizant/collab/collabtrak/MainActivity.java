@@ -4,7 +4,6 @@ import com.cognizant.collab.collabtrak.activities.*;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         Log.w("APP: ", "Start app");
-
 
         beaconManager = AppBeaconManager.getInstance();
         beaconManager.createBeaconManager(this);
@@ -125,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         counter.setText("Active");
         TextView label = (TextView)findViewById(R.id.counterLabelText);
         label.setText("");
-
         beaconManager.startMonitoring();
     }
     private void deactivateDevice() {
