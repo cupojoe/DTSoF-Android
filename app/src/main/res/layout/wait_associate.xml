@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A staff member will arrive shortly"
+        android:text="@string/staff"
         android:ems="14"
         android:id="@+id/counterLabelText"
         android:inputType="none"

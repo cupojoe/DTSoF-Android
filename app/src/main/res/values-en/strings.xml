@@ -6,6 +6,6 @@
     <string name="self_service_thankyou">thank you for using the self service</string>
     <string name="timer">see you soon \\n your turn is in 20-25 min</string>
     <string name="come_back">you are up in ±5 min</string>
-    <string name="ready">It\'s your turn</string>
+    <string name="ready">It\'s your turn!</string>
     <string name="staff">a staff member will arrive shortly</string>
 </resources>
