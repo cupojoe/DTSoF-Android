@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void activateDevice() {
         TextView counter = (TextView) findViewById(R.id.counterLabel);
-        counter.setText("Active");
+        counter.setText(R.string.active);
         TextView label = (TextView)findViewById(R.id.counterLabelText);
         label.setText("");
         beaconManager.startMonitoring();
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = new Intent(getBaseContext(), MainActivity.class);
         startActivity(myIntent);
         TextView counter = (TextView) findViewById(R.id.counterLabel);
-        counter.setText("Inactive");
+        counter.setText(R.string.inactive);
         TextView label = (TextView)findViewById(R.id.counterLabelText);
         label.setText("");
         beaconManager.stopMonitoring();
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
         TextView counter = (TextView) findViewById(R.id.counterLabel);
         counter.setText(value);
         TextView label = (TextView)findViewById(R.id.counterLabelText);
-        label.setText("Average waiting time");
+        label.setText(R.string.timer);
     }
     private void updateProduct(final String value) {
         TextView productCounter = (TextView) findViewById(R.id.productCounter);

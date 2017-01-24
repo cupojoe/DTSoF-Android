@@ -30,4 +30,5 @@
     <string name="come_back">in ±5 minuten werden sie bedient</string>
     <string name="ready">sie sind an der reihe!</string>
     <string name="staff">ein mitarbeiter ist auf dem weg</string>
+    <string name="active" translatable="false">Active</string>
 </resources>
