@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CollabTrak</string>
-    <string name="self_service_mode">self-service modus aktiviert</string>
     <string name="self_service_thankyou">danke, dass sie den self-service benutzein</string>
     <string name="completed">ihre daten wurden vom gerät gelöscht</string>
     <string name="timer">geschätzte wartezeit</string>
